@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import Paper from './Components/Paper'
+import Paper from './Components/Common/Paper'
 import './App.scss';
 
 import data from './avisio.json'
@@ -24,7 +24,10 @@ function App() {
 
   return (
     <div className="app">
-      <Paper />
+    <div className="title">Dashboard</div>
+      <div className="inner">
+        <Paper headerText='Top 3 Products' />
+      </div>
     </div>
   );
 }
