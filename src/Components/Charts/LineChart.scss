@@ -1,0 +1,15 @@
+.root {
+  // width: '33%',
+  height: 264px;
+  position: 'relative';
+  margin: 16px;
+  .chart_title {
+    color: #333;
+    font-size: '1.6rem';
+    font-family: 'Lato', sans-serif;
+    padding-left: 24px;
+    padding-top: 24px;
+    overflow: 'hidden';
+    text-overflow: 'ellipsis';
+  }
+}
