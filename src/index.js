@@ -6,9 +6,14 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
 
+import { StateProvider } from './Services/StateProvider';
+import reducer, { initialState } from './Services/reducer';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <App />
+    </StateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
