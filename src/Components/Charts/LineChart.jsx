@@ -1,8 +1,12 @@
 import React from 'react';
 
 import ReactApexChart from 'react-apexcharts';
+import * as V from 'victory';
+import { VictoryChart, VictoryLine } from 'victory';
 
 import Paper from '../Common/Paper';
+
+
 
 
 export default function LineChart(props) {
@@ -12,39 +16,36 @@ export default function LineChart(props) {
     value,
   } = props;
 
-  console.log(title, value)
+  // console.log(title, value)
+
+  const keys = value && Object.keys(value)
+  const values = value && Object.values(value)
+
+  // const orders = value && value.length && value.map(orders => orders)
+  // const order = orders && orders.map(order => order[1].length.toString())
+  // console.log(orders && orders[0][0], orders && orders[0][1].length)
+
+  // const a = values.map(item => item)
+  // console.log(keys, values, values && values.map(item => item))
 
   return (
     <>
       <div className='chart_title' >
         {title}
       </div>
-      <ReactApexChart
-        className='lineChart'
-        series={value}
-        options={{
-          dataLabels: {
-            enabled: false,
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shade: 'dark',
-              type: 'diagonal2',
-              gradientToColors: ['#87D4F9'],
-              stops: [0, 100],
-            },
-          },
-          labels,
-          legend: {
-            position: 'bottom',
-            height: 'fit-content',
-          },
-        }}
-        type="line"
-        height="80%"
-        width="100%" ss
-      />
+      {value && (
+        <VictoryChart>
+          <VictoryLine
+            data={values && values.map(item => item.length)}
+            // data accessor for x values
+            // x={keys && keys.map(item => item)}
+            // data accessor for y values
+            // y={values && values.map(item => item.length)}
+          />
+        </VictoryChart>
+      )}
     </>
   );
 }
+
+
