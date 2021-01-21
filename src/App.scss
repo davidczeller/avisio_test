@@ -3,15 +3,38 @@
   height: 100vh;
   padding: 24px 32px;
   background-color: #F7F7F7;
-
   .title {
     font-size: 3.6rem;
     color: #333;
     font-family: 'Lato', sans-serif;
     font-weight: 600;
   }
-
   .inner {
     padding: 24px 0;
+    .top3_container {
+      display: flex;
+      justify-content: space-between;
+      .title {
+        font-size: 1.3rem;
+      }
+      .row_title {
+        text-transform: capitalize;
+        font-family: 'Lato', sans-serif;
+        p {
+          margin-left: 4px;
+        }
+      }
+    }
+    .sort_button {
+      border: none;
+      background: none;
+      color: #415efe;
+      transition: all .4s ease-in-out; // position: absolute;
+      // top: 5px;
+      // right: 12px;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
 }
