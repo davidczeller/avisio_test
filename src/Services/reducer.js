@@ -1,5 +1,6 @@
 export const initialState = {
-  data: null
+  data: null,
+  sortType: 'cost'
 }
 
 const reducer = (state, action) => {
@@ -12,6 +13,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         data: action.data,
+      }
+      case 'SET_SORT_TYPE':
+      return {
+        ...state,
+        sortType: action.sortType,
       }
     default:
       return state
