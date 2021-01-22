@@ -14,7 +14,7 @@ import { useStateProviderValue } from './Services/StateProvider'
 function App() {
   const [{
     data,
-    sortType,
+    sort_type,
   }, dispatch] = useStateProviderValue()
 
   const [ordersByDay, setOrdersByDay] = useState()
@@ -191,7 +191,7 @@ function App() {
     return b.quantity - a.quantity
   });
 
-  if (sortType === 'cost') {
+  if (sort_type === 'cost') {
     sortByCost()
   } else {
     sortByQuantity()
@@ -321,19 +321,19 @@ function App() {
             content={
               <>
                 <div className="top3_container">
-                  <div className="row_title">
+                  <div className="row">
                     <div className="title">Products</div>
                     {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
                       <p key={item.cost}>{item.product}</p>
                     )}
                   </div>
-                  <div className="row_title">
+                  <div className="row">
                     <div className="title">Quantity</div>
                     {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
                       <p key={item.cost}>{item.quantity}</p>
                     )}
                   </div>
-                  <div className="row_title">
+                  <div className="row">
                     <div className="title">Cost</div>
                     {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
                       <p key={item.cost}>€ {item.cost}</p>

@@ -7,18 +7,18 @@ import Button from '../Common/Button'
 import { useStateProviderValue } from '../../Services/StateProvider'
 
 export default function Paper({ headerText, content, isButton, flex, marginLeft }) {
-  const [{ data, sortType }, dispatch] = useStateProviderValue();
+  const [{ data, sort_type }, dispatch] = useStateProviderValue();
 
   const setSortType = () => {
-    if (sortType === 'cost') {
+    if (sort_type === 'cost') {
       dispatch({
         type: 'SET_SORT_TYPE',
-        sortType: 'quantity'
+        sort_type: 'quantity'
       })
     } else {
       dispatch({
         type: 'SET_SORT_TYPE',
-        sortType: 'cost'
+        sort_type: 'cost'
       })
     }
   }
@@ -31,12 +31,12 @@ export default function Paper({ headerText, content, isButton, flex, marginLeft 
           <Button
             className="menu-trigger"
             icon={
-              sortType === 'cost'
+              sort_type === 'cost'
                 ? <img src="https://img.icons8.com/ios/24/ffffff/euro-pound-exchange.png" />
                 : <img src="https://img.icons8.com/ios/24/ffffff/negative-dynamic.png" />
             }
 
-            tooltip={sortType === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
+            tooltip={sort_type === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
             tooltipDirection='bottom'
             handleClick={() => setSortType()}
           />

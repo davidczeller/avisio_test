@@ -23,7 +23,6 @@ export default function Button({ handleClick, title, icon, size, tooltip, toolti
   return (
     tooltip ? (
       <Tooltip
-        // content={sortType === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
         content={tooltip}
         direction={tooltipDirection}>
         <button
