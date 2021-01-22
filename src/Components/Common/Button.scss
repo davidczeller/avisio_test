@@ -6,7 +6,9 @@ button {
   cursor: pointer;
   border-radius: 6px;
   padding: 4px;
+  box-shadow: none;
   &:hover {
-    border: 1px solid #888;
+    border-radius: 50%;
+    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
   }
 }
