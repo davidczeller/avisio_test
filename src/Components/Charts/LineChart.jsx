@@ -17,19 +17,17 @@ export default function LineChart(props) {
   } = props;
 
   const [width, setWidth] = useState(window.innerWidth)
+
   const updateWidth = (ev) => {
     setWidth(ev.target.innerWidth)
   }
 
-  // useEffect replaces `componentDidMount` and others
   useEffect(() => {
     window.addEventListener('resize', updateWidth)
 
-    // Removes listener on unmount
     return () => {
       window.removeEventListener('resize', updateWidth)
     }
-
   }, [])
 
   return (
@@ -40,7 +38,7 @@ export default function LineChart(props) {
       {value && (
         <svg viewBox={"0 0" + " " + width + " " + "350"} preserveAspectRatio="none" width="100%">
           <VictoryChart
-            animate={{ duration: 2000}}
+            animate={{ duration: 800 }}
             domainPadding={{ x: 0 }}
             standalone={false}
             width={width}
@@ -48,10 +46,10 @@ export default function LineChart(props) {
           >
             <VictoryLine
               style={{
-                data: { stroke: "#445FFF" }
+                data: {
+                  stroke: "#2F4EFE", strokeWidth: 5
+                },
               }}
-              // height={100}
-              // responsive
               data={value.map(supplierData => ({
                 x: supplierData.date,
                 y: supplierData.volume
