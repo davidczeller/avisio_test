@@ -2,6 +2,7 @@ import React from 'react'
 
 import './Paper.scss'
 import Tooltip from '../Common/Tooltip'
+import Button from '../Common/Button'
 
 import { useStateProviderValue } from '../../Services/StateProvider'
 
@@ -27,18 +28,18 @@ export default function Paper({ headerText, content, isButton, flex, marginLeft 
       <div className="top_container">
         <div className="header">{headerText}</div>
         {isButton && (
-          <Tooltip
-            content={sortType === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
-            direction="right">
-            <button
-              className='sort_button'
-              onClick={() => setSortType()}>
-              {sortType === 'cost'
-                ? <img src="https://img.icons8.com/ios/25/000000/euro-pound-exchange.png" />
-                : <img src="https://img.icons8.com/ios/23/000000/negative-dynamic.png" />
-              }
-            </button>
-          </Tooltip>
+          <Button
+            className="menu-trigger"
+            icon={
+              sortType === 'cost'
+                ? <img src="https://img.icons8.com/ios/24/ffffff/euro-pound-exchange.png" />
+                : <img src="https://img.icons8.com/ios/24/ffffff/negative-dynamic.png" />
+            }
+
+            tooltip={sortType === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
+            tooltipDirection='bottom'
+            handleClick={() => setSortType()}
+          />
         )}
       </div>
       {content}
