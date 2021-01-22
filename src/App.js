@@ -3,21 +3,25 @@ import React, { useEffect, useState } from 'react'
 import Paper from './Components/Common/Paper'
 import LineChart from './Components/Charts/LineChart'
 import BarChart from './Components/Charts/BarChart'
-import Tooltip from './Components/Common/Tooltip'
-import RadioButton from './Components/Common/RadioButton'
 import Button from './Components/Common/Button'
+import Dropdown from './Components/Common/Dropdown'
 import './App.scss';
 
 import json from './avisio.json'
 import { useStateProviderValue } from './Services/StateProvider'
-
+// import actions from './Services/actions'
 
 function App() {
-  const [{ data, sortType }, dispatch] = useStateProviderValue()
+  const [{
+    data,
+    sortType,
+  }, dispatch] = useStateProviderValue()
+
   const [ordersByDay, setOrdersByDay] = useState()
   const [ordersByProduct, setOrdersByProduct] = useState()
   const [ordersBySuppliers, setOrdersBySuppliers] = useState()
   const [ordersByDeliveryDate, setOrdersByDeliveryDate] = useState()
+
 
   const setData = () => {
     dispatch({
@@ -124,10 +128,6 @@ function App() {
     }
     acc[order.deliveryDate].push(order)
 
-    Object.keys(acc)
-
-    Object.values(acc)
-
     setOrdersByDeliveryDate(Object.entries(acc))
     return acc
   }, {})
@@ -146,21 +146,21 @@ function App() {
   }))
 
 
-  const [asd, setAsd] = useState()
+  // const [asd, setAsd] = useState()
 
-  const products = () => data && data.reduce((acc, order) => {
-    if (!acc[order.productName]) {
-      acc[order.productName] = []
-    }
-    acc[order.productName].push(order)
+  // const products = () => data && data.reduce((acc, order) => {
+  //   if (!acc[order.productName]) {
+  //     acc[order.productName] = []
+  //   }
+  //   acc[order.productName].push(order)
 
-    Object.keys(acc)
-    Object.values(acc)
-    Object.entries(acc)
+  //   Object.keys(acc)
+  //   Object.values(acc)
+  //   Object.entries(acc)
 
-    setAsd(acc)
-    return acc
-  }, {})
+  //   setAsd(acc)
+  //   return acc
+  // }, {})
 
   const supplierData = ordersBySuppliers && ordersBySuppliers.map(supplier => ({
     supplier: supplier[0],
@@ -177,7 +177,7 @@ function App() {
   console.log({ ordersByDay, ordersBySuppliers, ordersByDeliveryDate, deliveryDates, supplierData })
 
   useEffect(() => {
-    products()
+    // products()
     orderByDayData()
     orderByProduct()
     orderBySuppliers()
@@ -219,11 +219,8 @@ function App() {
   //   const [selectedSupplier, setSelectedSupplier] = useState('all')
   // const [selectedProductCategory1, setSelectedProductCategory1] = useState('all')
   // const [selectedProductCategory2, setSelectedProductCategory2] = useState('all')
-  const [active, setActive] = useState('All')
 
-  console.log({ selectedSupplier })
 
-  // console.log(data, radioButtonSupplierLabels, radioButtonProductCategory1Labels, radioButtonProductCategory2Labels)
   useEffect(() => {
     orderByDayData()
   }, [selectedSupplier, selectedProductCategory1, selectedProductCategory2])
@@ -231,7 +228,6 @@ function App() {
   return (
     <div className="app">
       <div className="title">Dashboard</div>
-      <Button title='Button' size='medium' tooltip='tooltip' tooltipDirection='bottom' />
       <div className="inner">
         <div className="left">
           <Paper
@@ -239,60 +235,48 @@ function App() {
             headerText='Order Volume'
             content={
               <>
-                <div className="filter">
-                  <button
-                    // changed='All'
-                    // id={0}
-                    // label='All'
-                    // value='All'
-                    onClick={() => (setSelectedSupplier('all'))}
-                  >All</button>
-                  {radioButtonSupplierLabels && radioButtonSupplierLabels.map((supplier, idx) =>
-                    <button
-                      // changed={supplier}
-                      // id={idx + 1}
-                      // label={supplier}
-                      // value={supplier}
-                      onClick={() => (setSelectedSupplier(supplier))}
-                    >{supplier}</button>
+                <Dropdown
+                  content={(
+                    <>
+                      <Button
+                        className="menu-trigger"
+                        marginTop='0px'
+                        noPadding
+                        icon={<img alt='menu-trigger' src="https://img.icons8.com/ios/24/ffffff/multiply.png" />}
+                        tooltip='Set To Default'
+                        tooltipDirection='bottom'
+                        handleClick={() => {
+                          setSelectedSupplier('all')
+                          setSelectedProductCategory1('all')
+                          setSelectedProductCategory2('all')
+                        }}
+                      />
+                      <select name="supplier" id="1" onChange={(e) => setSelectedSupplier(e.currentTarget.value)}>
+                        <option disabled>Suppliers</option>
+                        <option value={'all'}>All</option>
+                        {radioButtonSupplierLabels && radioButtonSupplierLabels.map(supplier =>
+                          <option value={supplier}>{supplier}</option>
+                        )}
+                      </select>
+                      <select name="productCategory1" id="2" onChange={(e) => setSelectedProductCategory1(e.currentTarget.value)}>
+                        <option disabled>Product Category 1</option>
+                        <option value={'all'}>All</option>
+                        {radioButtonProductCategory1Labels && radioButtonProductCategory1Labels.map((productCategory1, idx) =>
+                          <option>{productCategory1}</option>
+                        )}
+                      </select>
+                      <select name="productCategory2" id="3" onChange={(e) => setSelectedProductCategory2(e.currentTarget.value)}>
+                        <option disabled>Product Category 2</option>
+                        <option value={'all'}>All</option>
+                        {radioButtonProductCategory2Labels && radioButtonProductCategory2Labels.map((productCategory2, idx) =>
+                          <option>
+                            {productCategory2}
+                          </option>
+                        )}
+                      </select>
+                    </>
                   )}
-                </div>
-                <div className="filter">
-                  <button
-                    // changed='All'
-                    // id={0}
-                    // label='All'
-                    // value='All'
-                    onClick={() => (setSelectedProductCategory1('all'))}
-                  >All</button>
-                  {radioButtonProductCategory1Labels && radioButtonProductCategory1Labels.map((productCategory1, idx) =>
-                    <button
-                      // changed={supplier}
-                      // id={idx + 1}
-                      // label={supplier}
-                      // value={supplier}
-                      onClick={() => (setSelectedProductCategory1(productCategory1))}
-                    >{productCategory1}</button>
-                  )}
-                </div>
-                <div className="filter">
-                  <button
-                    // changed='All'
-                    // id={0}
-                    // label='All'
-                    // value='All'
-                    onClick={() => (setSelectedProductCategory2('all'))}
-                  >All</button>
-                  {radioButtonProductCategory2Labels && radioButtonProductCategory2Labels.map((productCategory2, idx) =>
-                    <button
-                      // changed={supplier}
-                      // id={idx + 1}
-                      // label={supplier}
-                      // value={supplier}
-                      onClick={() => (setSelectedProductCategory2(productCategory2))}
-                    >{productCategory2}</button>
-                  )}
-                </div>
+                />
                 <LineChart
                   title=''
                   value={orderByDay}
@@ -317,14 +301,16 @@ function App() {
             flex='3'
             headerText='Deliveries'
             content={
-              deliveryDates && deliveryDates.map(delivery => (
-                <>
-                  <div>{delivery.date}</div>
-                  {Object.entries(delivery.suppliers).map(kvp => (
-                    <div key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
-                  ))}
-                </>
-              ))
+              <div className="delivery_container">
+                {deliveryDates && deliveryDates.map(delivery => (
+                  <div className='delivery_column'>
+                    <div className='delivery_header'>{delivery.date}</div>
+                    {Object.entries(delivery.suppliers).map(kvp => (
+                      <div className='deliveries' key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             }
           />
           <Paper
@@ -354,7 +340,6 @@ function App() {
                     )}
                   </div>
                 </div>
-
               </>
             }
           />
