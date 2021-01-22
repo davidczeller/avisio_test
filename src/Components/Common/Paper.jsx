@@ -6,7 +6,7 @@ import Button from '../Common/Button'
 
 import { useStateProviderValue } from '../../Services/StateProvider'
 
-export default function Paper({ headerText, content, isButton, flex, marginLeft }) {
+export default function Paper({ headerText, content, isButton, flex }) {
   const [{ data, sort_type }, dispatch] = useStateProviderValue();
 
   const setSortType = () => {
@@ -24,7 +24,7 @@ export default function Paper({ headerText, content, isButton, flex, marginLeft 
   }
 
   return (
-    <div className='paper_container' style={{ flex, marginLeft: marginLeft ? 24 : 0 }}>
+    <div className='paper_container' style={{ flex }}>
       <div className="top_container">
         <div className="header">{headerText}</div>
         {isButton && (

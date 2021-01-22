@@ -1,6 +1,6 @@
 .app {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 24px 32px; // background-color: #F7F7F7;
   background: linear-gradient(45deg, #845EC2, #31809A);
   .title {
@@ -10,7 +10,7 @@
     font-weight: 600;
   }
   .inner {
-    height: calc(100% - 48px);
+    height: calc(100vh - 200px);
     padding: 24px 0;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
           padding: 4px;
           background: #0000000f;
         }
-        .row{
+        .row {
           text-transform: capitalize;
           font-family: 'Lato', sans-serif;
           flex: 1 1;
@@ -93,6 +93,23 @@
       padding: 8px;
       border-radius: 50%;
       cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .left {
+    flex-direction: column;
+  }
+  .right {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .app {
+    .title {
+      font-size: 3rem;
     }
   }
 }

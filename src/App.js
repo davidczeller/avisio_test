@@ -286,7 +286,6 @@ function App() {
           />
           <Paper
             flex='1'
-            marginLeft
             headerText='Supplier Ranking'
             content={
               <BarChart
@@ -315,7 +314,6 @@ function App() {
           />
           <Paper
             flex='1'
-            marginLeft
             isButton
             headerText='Top 3 Products Ordered'
             content={

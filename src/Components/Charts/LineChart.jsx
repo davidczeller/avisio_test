@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import ReactApexChart from 'react-apexcharts';
 import * as V from 'victory';
-import { VictoryChart, VictoryLine } from 'victory';
+import { VictoryChart, VictoryLine, VictoryAxis } from 'victory';
 
 import Paper from '../Common/Paper';
 
@@ -42,8 +42,11 @@ export default function LineChart(props) {
             domainPadding={{ x: 0 }}
             standalone={false}
             width={width}
-            height={350}
+            height={380}
+            padding={{ top: 20, bottom: 64, left: 40, right: 24 }}
           >
+            <VictoryAxis fixLabelOverlap />
+            <VictoryAxis dependentAxis />
             <VictoryLine
               style={{
                 data: {

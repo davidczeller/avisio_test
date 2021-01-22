@@ -17,7 +17,7 @@ export default function LineChart(props) {
   } = props;
 
   const [width, setWidth] = useState(window.innerWidth)
-  
+
   const updateWidth = (ev) => {
     setWidth(ev.target.innerWidth)
   }
@@ -38,9 +38,11 @@ export default function LineChart(props) {
       {value && (
         <svg viewBox={"0 0" + " " + width + " " + "350"} preserveAspectRatio="none" width="100%" height="100%">
           <VictoryChart
-            domainPadding={{ y: 20, x: 20 }}
+            animate={{ duration: 800 }}
+            domainPadding={{ y: 210, x: 20 }}
             standalone={false}
             width={width}
+            padding={{ top: 20, bottom: 40, left: 0, right: 24 }}
           >
             <VictoryBar
               horizontal
@@ -51,9 +53,14 @@ export default function LineChart(props) {
                   stroke: "#2F4EFE", strokeWidth: 8,
                 },
                 labels: {
-                  fontSize: 15,
+                  fontSize: 35,
+                  fontWeight: 600,
+                  fill: "#333"
                 }
               }}
+              labelComponent={
+                <VictoryLabel dx={'-20%'} dy={-32}/>
+              }
               data={value.map(supplierData => ({
                 label: supplierData.supplier,
                 x: supplierData.supplier,
