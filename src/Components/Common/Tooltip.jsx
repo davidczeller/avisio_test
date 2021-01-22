@@ -16,8 +16,6 @@ export default function Tooltip({ delay, direction, children, content }) {
     setActive(false)
   }
 
-  console.log(direction)
-
   return (
     <div
       className="Tooltip-Wrapper"
