@@ -1,0 +1,12 @@
+button {
+  border: 1px solid transparent;
+  background: none;
+  font-family: 'Lato', sans-serif;
+  transition: all .4s ease-in-out;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 4px;
+  &:hover {
+    border: 1px solid #888;
+  }
+}

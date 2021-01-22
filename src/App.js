@@ -4,6 +4,8 @@ import Paper from './Components/Common/Paper'
 import LineChart from './Components/Charts/LineChart'
 import BarChart from './Components/Charts/BarChart'
 import Tooltip from './Components/Common/Tooltip'
+import RadioButton from './Components/Common/RadioButton'
+import Button from './Components/Common/Button'
 import './App.scss';
 
 import json from './avisio.json'
@@ -35,13 +37,9 @@ function App() {
     }, 0)
   )
 
-  // const selectedSupplier = 'Yum Food'
-  // const selectedProductCategory1 = 'food'
-  // const selectedProductCategory2 = 'bread'
-
-  const selectedSupplier = 'all'
-  const selectedProductCategory1 = 'all'
-  const selectedProductCategory2 = 'all'
+  const [selectedSupplier, setSelectedSupplier] = useState('all')
+  const [selectedProductCategory1, setSelectedProductCategory1] = useState('all')
+  const [selectedProductCategory2, setSelectedProductCategory2] = useState('all')
 
 
   const orderByDayData = () => data && data
@@ -57,12 +55,6 @@ function App() {
       setOrdersByDay(Object.entries(acc))
       return acc
     }, {})
-  // .map(x => (x
-  // {
-  //   date: x[0],
-  //   volume: getVolume(x[1])
-  // }
-  // ))
 
   //every day volume
   const orderByDay = ordersByDay && ordersByDay.map(x => ({
@@ -209,70 +201,164 @@ function App() {
     sortByCost()
   }, [])
 
+
+
+  const radioButtonSupplierLabels = data && data.map(item => item.supplier)
+    .filter((value, index, array) => (
+      array.indexOf(value) === index
+    ))
+  const radioButtonProductCategory1Labels = data && data.map(item => item.productCategory1)
+    .filter((value, index, array) => (
+      array.indexOf(value) === index
+    ))
+  const radioButtonProductCategory2Labels = data && data.map(item => item.productCategory2)
+    .filter((value, index, array) => (
+      array.indexOf(value) === index
+    ))
+
+  //   const [selectedSupplier, setSelectedSupplier] = useState('all')
+  // const [selectedProductCategory1, setSelectedProductCategory1] = useState('all')
+  // const [selectedProductCategory2, setSelectedProductCategory2] = useState('all')
+  const [active, setActive] = useState('All')
+
+  console.log({ selectedSupplier })
+
+  // console.log(data, radioButtonSupplierLabels, radioButtonProductCategory1Labels, radioButtonProductCategory2Labels)
+  useEffect(() => {
+    orderByDayData()
+  }, [selectedSupplier, selectedProductCategory1, selectedProductCategory2])
+
   return (
     <div className="app">
       <div className="title">Dashboard</div>
+      <Button title='Button' size='medium' tooltip='tooltip' tooltipDirection='bottom' />
       <div className="inner">
-        <Paper
-          isButton
-          headerText='Top 3 Products Ordered'
-          content={
-            <>
-              <div className="top3_container">
-                <div className="row_title">
-                  <div className="title">Products</div>
-                  {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                    <p key={item.cost}>{item.product}</p>
-                  )}
-                </div>
-                <div className="row_title">
-                  <div className="title">Quantity</div>
-                  {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                    <p key={item.cost}>{item.quantity}</p>
-                  )}
-                </div>
-                <div className="row_title">
-                  <div className="title">Cost</div>
-                  {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                    <p key={item.cost}>€ {item.cost}</p>
-                  )}
-                </div>
-              </div>
-
-            </>
-          }
-        />
-        <Paper
-          headerText='Deliveries'
-          content={
-            deliveryDates && deliveryDates.map(delivery => (
+        <div className="left">
+          <Paper
+            flex='3'
+            headerText='Order Volume'
+            content={
               <>
-                <div>{delivery.date}</div>
-                {Object.entries(delivery.suppliers).map(kvp => (
-                  <div key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
-                ))}
+                <div className="filter">
+                  <button
+                    // changed='All'
+                    // id={0}
+                    // label='All'
+                    // value='All'
+                    onClick={() => (setSelectedSupplier('all'))}
+                  >All</button>
+                  {radioButtonSupplierLabels && radioButtonSupplierLabels.map((supplier, idx) =>
+                    <button
+                      // changed={supplier}
+                      // id={idx + 1}
+                      // label={supplier}
+                      // value={supplier}
+                      onClick={() => (setSelectedSupplier(supplier))}
+                    >{supplier}</button>
+                  )}
+                </div>
+                <div className="filter">
+                  <button
+                    // changed='All'
+                    // id={0}
+                    // label='All'
+                    // value='All'
+                    onClick={() => (setSelectedProductCategory1('all'))}
+                  >All</button>
+                  {radioButtonProductCategory1Labels && radioButtonProductCategory1Labels.map((productCategory1, idx) =>
+                    <button
+                      // changed={supplier}
+                      // id={idx + 1}
+                      // label={supplier}
+                      // value={supplier}
+                      onClick={() => (setSelectedProductCategory1(productCategory1))}
+                    >{productCategory1}</button>
+                  )}
+                </div>
+                <div className="filter">
+                  <button
+                    // changed='All'
+                    // id={0}
+                    // label='All'
+                    // value='All'
+                    onClick={() => (setSelectedProductCategory2('all'))}
+                  >All</button>
+                  {radioButtonProductCategory2Labels && radioButtonProductCategory2Labels.map((productCategory2, idx) =>
+                    <button
+                      // changed={supplier}
+                      // id={idx + 1}
+                      // label={supplier}
+                      // value={supplier}
+                      onClick={() => (setSelectedProductCategory2(productCategory2))}
+                    >{productCategory2}</button>
+                  )}
+                </div>
+                <LineChart
+                  title=''
+                  value={orderByDay}
+                />
               </>
-            ))
-          }
-        />
-        <Paper
-          headerText='Order Volume'
-          content={
-            <LineChart
-              title=''
-              value={orderByDay}
-            />
-          }
-        />
-        <Paper
-          headerText='Supplier Ranking'
-          content={
-            <BarChart
-              title=''
-              value={supplierData}
-            />
-          }
-        />
+            }
+          />
+          <Paper
+            flex='1'
+            marginLeft
+            headerText='Supplier Ranking'
+            content={
+              <BarChart
+                title=''
+                value={supplierData}
+              />
+            }
+          />
+        </div>
+        <div className="right">
+          <Paper
+            flex='3'
+            headerText='Deliveries'
+            content={
+              deliveryDates && deliveryDates.map(delivery => (
+                <>
+                  <div>{delivery.date}</div>
+                  {Object.entries(delivery.suppliers).map(kvp => (
+                    <div key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
+                  ))}
+                </>
+              ))
+            }
+          />
+          <Paper
+            flex='1'
+            marginLeft
+            isButton
+            headerText='Top 3 Products Ordered'
+            content={
+              <>
+                <div className="top3_container">
+                  <div className="row_title">
+                    <div className="title">Products</div>
+                    {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
+                      <p key={item.cost}>{item.product}</p>
+                    )}
+                  </div>
+                  <div className="row_title">
+                    <div className="title">Quantity</div>
+                    {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
+                      <p key={item.cost}>{item.quantity}</p>
+                    )}
+                  </div>
+                  <div className="row_title">
+                    <div className="title">Cost</div>
+                    {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
+                      <p key={item.cost}>€ {item.cost}</p>
+                    )}
+                  </div>
+                </div>
+
+              </>
+            }
+          />
+        </div>
       </div>
     </div>
   )

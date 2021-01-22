@@ -5,7 +5,7 @@ import Tooltip from '../Common/Tooltip'
 
 import { useStateProviderValue } from '../../Services/StateProvider'
 
-export default function Paper({ headerText, content, isButton }) {
+export default function Paper({ headerText, content, isButton, flex, marginLeft }) {
   const [{ data, sortType }, dispatch] = useStateProviderValue();
 
   const setSortType = () => {
@@ -23,7 +23,7 @@ export default function Paper({ headerText, content, isButton }) {
   }
 
   return (
-    <div className='paper_container'>
+    <div className='paper_container' style={{ flex, marginLeft: marginLeft ? 24 : 0 }}>
       <div className="top_container">
         <div className="header">{headerText}</div>
         {isButton && (
