@@ -1,0 +1,31 @@
+.top3_container {
+  display: flex;
+  justify-content: space-between;
+  height: 120px;
+  .top_products_title {
+    font-size: 1.3rem;
+    color: #333;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 4px;
+    background: #0000000f;
+  }
+  .row {
+    text-transform: capitalize;
+    font-family: 'Lato', sans-serif;
+    flex: 1 1;
+    &:nth-child(odd) {
+      background: #0000000f;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+    &:nth-child(even) {
+      margin: 0 4px;
+    }
+    p {
+      margin-left: 4px;
+    }
+  }
+}
