@@ -57,6 +57,7 @@
         border-radius: 6px;
         font-family: 'Lato', sans-serif;
         cursor: pointer;
+        text-transform: capitalize;
       }
       &.active {
         opacity: 1;
