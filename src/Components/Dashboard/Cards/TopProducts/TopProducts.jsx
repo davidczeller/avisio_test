@@ -12,7 +12,6 @@ export default function TopProducts() {
 
   useEffect(() => {
     orderByProduct()
-    sortByCost()
   }, [data])
 
   useEffect(() => {
@@ -85,20 +84,20 @@ export default function TopProducts() {
           <div className="top3_container">
             <div className="row">
               <div className="top_products_title">Products</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                <p key={item.cost}>{item.product}</p>
+              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+                <p key={idx + item.product}>{item.product}</p>
               )}
             </div>
             <div className="row">
               <div className="top_products_title">Quantity</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                <p key={item.cost}>{item.quantity}</p>
+              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+                <p key={idx + item.quantity}>{item.quantity}</p>
               )}
             </div>
             <div className="row">
               <div className="top_products_title">Cost</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map(item =>
-                <p key={item.cost}>€ {item.cost}</p>
+              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+                <p key={idx + item.cost}>€ {item.cost}</p>
               )}
             </div>
           </div>

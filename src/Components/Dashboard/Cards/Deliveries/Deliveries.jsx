@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Paper from '../../../Common/Paper'
+import './Deliveries.scss'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default () => {
-  const [{data}, dispatch] = useStateProviderValue()
+  const [{ data }, dispatch] = useStateProviderValue()
   const [ordersByDeliveryDate, setOrdersByDeliveryDate] = useState()
+
+  useEffect(() => {
+    orderByDeliveryDate()
+  }, [data])
 
   const orderByDeliveryDate = () => data && data.reduce((acc, order) => {
     if (!acc[order.deliveryDate]) {
@@ -35,14 +40,16 @@ export default () => {
       flex='3'
       headerText='Deliveries'
       content={
-        deliveryDates && deliveryDates.map(delivery => (
-          <>
-            <div>{delivery.date}</div>
-            {Object.entries(delivery.suppliers).map(kvp => (
-              <div key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
-            ))}
-          </>
-        ))
+        <div className="delivery_container">
+          {deliveryDates && deliveryDates.map((delivery, idx) => (
+            <div key={idx + 1} className='delivery_column'>
+              <div className='delivery_header'>{delivery.date}</div>
+              {Object.entries(delivery.suppliers).map(kvp => (
+                <div className='deliveries' key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
+              ))}
+            </div>
+          ))}
+        </div>
       }
     />
   )
