@@ -11,9 +11,9 @@ export const initialState = {
 }
 
 const reducer = (state, action) => {
-  // console.log({
-  //   action
-  // })
+  console.log({
+    action
+  })
 
   switch (action.type) {
     case 'SET_DATA':
@@ -27,39 +27,10 @@ const reducer = (state, action) => {
         sort_type: action.sort_type,
       }
     case 'SET_ORDERS_BY_DAY':
+      // console.log(action.orders_by_day)
       return {
         ...state,
-        orders_by_day: action.orders_by_product,
-      }
-    case 'SET_ORDERS_BY_PRODUCT':
-      return {
-        ...state,
-        orders_by_product: action.orders_by_product,
-      }
-    case 'SET_ORDERS_BY_SUPPLIER':
-      return {
-        ...state,
-        orders_by_supplier: action.orders_by_supplier,
-      }
-    case 'SET_ORDERS_BY_DELIVERY_DATE':
-      return {
-        ...state,
-        orders_delivery_date: action.orders_delivery_date,
-      }
-    case 'SET_SELECTED_SUPPLIER':
-      return {
-        ...state,
-        selected_supplier: action.selected_supplier,
-      }
-    case 'SET_SELECTED_PRODUCT_CATEGORY_1':
-      return {
-        ...state,
-        selected_product_category_1: action.selected_product_category_1,
-      }
-    case 'SET_SELECTED_PRODUCT_CATEGORY_2':
-      return {
-        ...state,
-        selected_product_category_2: action.selected_product_category_2,
+        orders_by_day: action.orders_by_day,
       }
     default:
       return state
