@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Paper from '../../../Common/Paper'
 import BarChart from '../../../Charts/BarChart'
+import './SupplierRanking.scss'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function SupplierRanking() {
-  const [{data}, dispatch] = useStateProviderValue()
+  const [{ data }, dispatch] = useStateProviderValue()
+  const [ordersBySuppliers, setOrdersBySuppliers] = useState()
+
+  useEffect(() => {
+    orderBySuppliers()
+  }, [data])
 
   const getVolume = (orders) => (
     orders.reduce((acc, order) => {
@@ -14,6 +20,16 @@ export default function SupplierRanking() {
       return acc
     }, 0)
   )
+
+  const orderBySuppliers = () => data && data.reduce((acc, order) => {
+    if (!acc[order.supplier]) {
+      acc[order.supplier] = []
+    }
+    acc[order.supplier].push(order)
+
+    setOrdersBySuppliers(Object.entries(acc))
+    return acc
+  }, {})
 
   const supplierData = ordersBySuppliers && ordersBySuppliers.map(supplier => ({
     supplier: supplier[0],
