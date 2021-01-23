@@ -29,7 +29,7 @@ export default function LineChart(props) {
       window.removeEventListener('resize', updateWidth)
     }
   }, [])
-
+  console.log(title)
   return (
     <>
       <div className='chart_title' >

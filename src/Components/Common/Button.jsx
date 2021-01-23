@@ -11,7 +11,6 @@ export default function Button({ handleClick, title, icon, size, tooltip, toolti
   const medium = '1.2rem'
   const large = '1.6rem'
 
-  console.log({ size, buttonSize })
 
   useEffect(() => {
     if (size === 'small') setButtonSize(small)
@@ -19,7 +18,6 @@ export default function Button({ handleClick, title, icon, size, tooltip, toolti
     if (size === 'large') setButtonSize(large)
   }, [size])
 
-  console.log(tooltip)
   return (
     tooltip ? (
       <Tooltip
