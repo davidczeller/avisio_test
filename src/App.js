@@ -23,5 +23,3 @@ export default function App() {
     </div>
   )
 }
-
-//icons as static instead of links

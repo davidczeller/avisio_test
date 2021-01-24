@@ -59,7 +59,7 @@ export default function Dashboard() {
                 <Draggable key={id} draggableId={id} index={index}>
                   {provided => (
                     <div
-                      // className='asd'
+                      className='paper_inner_container'
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}

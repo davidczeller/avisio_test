@@ -89,21 +89,27 @@ export default function TopProducts() {
           <div className="top3_container">
             <div className="row">
               <div className="top_products_title">Products</div>
-              {orderData && orderData.slice(0, 3).map((item, idx) =>
-                <p key={idx + item.product}>{item.product}</p>
-              )}
+              <div className='top_products_orders'>
+                {orderData && orderData.slice(0, 3).map((item, idx) =>
+                  <p key={idx + item.product}>{item.product}</p>
+                )}
+              </div>
             </div>
             <div className="row">
               <div className="top_products_title">Quantity</div>
-              {orderData && orderData.slice(0, 3).map((item, idx) =>
-                <p key={idx + item.quantity}>{item.quantity}</p>
-              )}
+              <div className='top_products_orders'>
+                {orderData && orderData.slice(0, 3).map((item, idx) =>
+                  <p key={idx + item.quantity}>{item.quantity}</p>
+                )}
+              </div>
             </div>
             <div className="row">
               <div className="top_products_title">Cost</div>
-              {orderData && orderData.slice(0, 3).map((item, idx) =>
-                <p key={idx + item.cost}>€ {item.cost}</p>
-              )}
+              <div className='top_products_orders'>
+                {orderData && orderData.slice(0, 3).map((item, idx) =>
+                  <p key={idx + item.cost}>€ {item.cost}</p>
+                )}
+              </div>
             </div>
           </div>
         </>

@@ -2,18 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  height: 76%;
   .delivery_column {
-    height: 120px;
+    height: 100%;
     flex: 1;
     background: transparent;
+    border-radius: 6px;
     &:nth-child(odd) {
-      background: linear-gradient(
-        to right bottom,
-        rgba(255, 255, 255, 0.8),
-        rgba(255, 255, 255, 0.3)
-      );
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
+      background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
     }
     &:nth-child(even) {
       margin: 0 4px;
@@ -23,13 +19,7 @@
       color: #333;
       font-family: 'Lato', sans-serif;
       font-weight: 400;
-      background: linear-gradient(
-        to right bottom,
-        rgba(255, 255, 255, 0.8),
-        rgba(255, 255, 255, 0.3)
-      );
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
+      background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
       padding: 4px;
     }
     .deliveries {
