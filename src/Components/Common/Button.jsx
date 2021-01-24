@@ -5,17 +5,16 @@ import './Button.scss'
 
 export default function Button({ handleClick, title, icon, size, tooltip, tooltipDirection, marginTop, noPadding }) {
 
-  const [buttonSize, setButtonSize] = useState('1,2rem')
+  const [buttonSize, setButtonSize] = useState('1.2rem')
 
-  const small = '1rem'
-  const medium = '1.2rem'
-  const large = '1.6rem'
-
+  const sizes = {
+    small: '1rem',
+    medium: '1.2rem',
+    large: '1.6rem'
+  }
 
   useEffect(() => {
-    if (size === 'small') setButtonSize(small)
-    if (size === 'medium') setButtonSize(medium)
-    if (size === 'large') setButtonSize(large)
+    setButtonSize(sizes[size])
   }, [size])
 
   return (
