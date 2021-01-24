@@ -7,6 +7,9 @@
   box-shadow: 0px 0px 10px 0px #888888;
   position: relative;
   height: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
   &:nth-child(even) {
     margin-left: 24px;
   }
@@ -25,7 +28,6 @@
 
 @media only screen and (max-width: 1280px) {
   .paper_container {
-    overflow: scroll;
     width: 100%;
     padding-bottom: 20px;
     margin: 0;

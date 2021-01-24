@@ -8,13 +8,14 @@
     font-family: 'Lato', sans-serif;
     font-weight: 600;
   }
-
 }
 
 @media only screen and (max-width: 600px) {
   .app {
+    padding: 24px 8px;
     .title {
       font-size: 3rem;
+      margin-left: 8px;
     }
   }
 }

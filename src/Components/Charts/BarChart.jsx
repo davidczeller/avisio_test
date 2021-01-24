@@ -35,20 +35,22 @@ export default function BarChart(props) {
     return supplierData.quantity
   }
 
+  console.log(width)
+
   return (
     <>
       <div className='chart_title' >
         {title}
       </div>
       {value && (
-        <svg viewBox={"0 0" + " " + width + " " + "350"} preserveAspectRatio="none" width="100%" height="100%">
+        <svg viewBox={"0 0" + " " + width + " " + "350"} preserveAspectRatio="none" width="100%" height='100%'>
           <VictoryChart
             animate={{ duration: 800 }}
             domainPadding={{ y: 210, x: 20 }}
             standalone={false}
             width={width}
             height={280}
-            padding={{ top: 30, bottom: 20, left: 0, right: 24 }}
+            padding={{ top: 30, bottom: -40, left: 0, right: 24 }}
           >
             <VictoryAxis fixLabelOverlap />
             <VictoryAxis dependentAxis />
@@ -61,7 +63,7 @@ export default function BarChart(props) {
                   stroke: "#2F4EFE", strokeWidth: 8,
                 },
                 labels: {
-                  fontSize: 35,
+                  fontSize: 24,
                   fontWeight: 600,
                   fill: "#333"
                 }

@@ -70,21 +70,21 @@ export default function OrderVolume() {
                     setSelectedProductCategory2('all')
                   }}
                 />
-                <select name="supplier" id="1" onChange={(e) => setSelectedSupplier(e.currentTarget.value)}>
+                <select value={selectedSupplier} name="supplier" id="1" onChange={(e) => setSelectedSupplier(e.currentTarget.value)}>
                   <option disabled>Suppliers</option>
                   <option value={'all'}>All</option>
                   {SupplierLabelOptions && SupplierLabelOptions.map((supplier, idx) =>
                     <option value={supplier} key={idx + 1}>{supplier}</option>
                   )}
                 </select>
-                <select name="productCategory1" id="2" onChange={(e) => setSelectedProductCategory1(e.currentTarget.value)}>
+                <select value={selectedProductCategory1} name="productCategory1" id="2" onChange={(e) => setSelectedProductCategory1(e.currentTarget.value)}>
                   <option disabled>Product Category 1</option>
                   <option value={'all'}>All</option>
                   {ProductCategory1LabelOptions && ProductCategory1LabelOptions.map((productCategory1, idx) =>
                     <option key={idx + 1}>{productCategory1}</option>
                   )}
                 </select>
-                <select name="productCategory2" id="3" onChange={(e) => setSelectedProductCategory2(e.currentTarget.value)}>
+                <select value={selectedProductCategory2} name="productCategory2" id="3" onChange={(e) => setSelectedProductCategory2(e.currentTarget.value)}>
                   <option disabled>Product Category 2</option>
                   <option value={'all'}>All</option>
                   {ProductCategory2LabelOptions && ProductCategory2LabelOptions.map((productCategory2, idx) =>

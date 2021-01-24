@@ -3,8 +3,10 @@
   justify-content: space-between;
   align-items: baseline;
   height: 76%;
+  overflow: scroll;
   .delivery_column {
     height: 100%;
+    min-height: 120px;
     flex: 1;
     background: transparent;
     border-radius: 6px;
