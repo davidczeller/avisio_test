@@ -1,6 +1,7 @@
 export const initialState = {
   data: null,
-  orders_by_day: null
+  orders_by_day: null,
+  loading: false,
 }
 
 const reducer = (state, action) => {
@@ -14,6 +15,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         orders_by_day: action.orders_by_day,
+      }
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: action.loading,
       }
     default:
       return state

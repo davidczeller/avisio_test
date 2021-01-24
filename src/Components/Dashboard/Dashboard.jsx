@@ -6,7 +6,10 @@ import SupplierRanking from './Cards/SupplierRanking/SupplierRanking'
 import OrderVolume from './Cards/OrderVolume/OrderVolume'
 import './Dashboard.scss'
 
+import { useStateProviderValue } from '../../Services/StateProvider'
+
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import ContentLoader from "react-content-loader"
 
 const paperArr = [
   {
@@ -32,7 +35,7 @@ const paperArr = [
 ]
 
 export default function Dashboard() {
-
+  const [{ loading },] = useStateProviderValue()
   const [papers, updatePapers] = useState(paperArr)
 
   const handleOnDragEnd = (result) => {
@@ -47,33 +50,49 @@ export default function Dashboard() {
   return (
     <div>
       <div className="title">Dashboard</div>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId='papers'>
-          {provided => (
-            <div
-              className='paper_outer_container'
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {papers.map(({ id, content }, index) => (
-                <Draggable key={id} draggableId={id} index={index}>
-                  {provided => (
-                    <div
-                      className='paper_inner_container'
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      {content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      {loading ? (
+        <ContentLoader
+          speed={1}
+          width={'100vw'}
+          height={'60vh'}
+          viewBox="0 0 98vw 0"
+          backgroundColor="#e2e2e2"
+          foregroundColor="#6bdaeb66"
+        >
+          <rect x="0" y="16" rx="6" ry="6" width="65vw" height="320" />
+          <rect x="66vw" y="16" rx="6" ry="6" width="32vw" height="320" />
+          <rect x="0" y="360" rx="6" ry="6" width="65vw" height="210" />
+          <rect x="66vw" y="360" rx="6" ry="6" width="32vw" height="210" />
+        </ContentLoader>
+      ) : (
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId='papers'>
+              {provided => (
+                <div
+                  className='paper_outer_container'
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {papers.map(({ id, content }, index) => (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {provided => (
+                        <div
+                          className='paper_inner_container'
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          {content}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
     </div >
   )
 }
