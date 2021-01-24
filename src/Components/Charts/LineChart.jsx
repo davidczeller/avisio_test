@@ -36,14 +36,14 @@ export default function LineChart(props) {
         {title}
       </div>
       {value && (
-        <svg viewBox={"0 0" + " " + width + " " + "350"} preserveAspectRatio="none" width="100%">
+        <svg viewBox={"0 0" + " " + width + " " + "410"} preserveAspectRatio="none" width="100%">
           <VictoryChart
             animate={{ duration: 800 }}
             domainPadding={{ x: 0 }}
             standalone={false}
             width={width}
-            height={380}
-            padding={{ top: 20, bottom: 64, left: 40, right: 24 }}
+            height={420}
+            padding={{ top: 20, bottom: 40, left: 40, right: 24 }}
           >
             <VictoryAxis fixLabelOverlap />
             <VictoryAxis dependentAxis />

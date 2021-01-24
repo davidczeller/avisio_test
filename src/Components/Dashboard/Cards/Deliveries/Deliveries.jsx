@@ -24,7 +24,7 @@ export default () => {
   }, {})
 
   const deliveryDates = ordersByDeliveryDate && ordersByDeliveryDate.map(order => (
-    {date: order[0], suppliers: order[1]}
+    { date: order[0], suppliers: order[1] }
   )).map(item => ({
     date: item.date,
     suppliers: item.suppliers.map(item => item.supplier).reduce((acc, supplier) => {
@@ -47,7 +47,10 @@ export default () => {
             <div key={idx + 1} className='delivery_column'>
               <div className='delivery_header'>{delivery.date}</div>
               {Object.entries(delivery.suppliers).map(kvp => (
-                <div className='deliveries' key={`${delivery.date}_${kvp[0]}`}>{kvp[0]} {kvp[1]}</div>
+                <div className='deliveries' key={`${delivery.date}_${kvp[0]}`}>
+                  <p className='delivery_supplier'>{kvp[0]}</p>
+                  <p>{kvp[1]}</p>
+                </div>
               ))}
             </div>
           ))}

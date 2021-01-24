@@ -47,8 +47,8 @@ export default function BarChart(props) {
             domainPadding={{ y: 210, x: 20 }}
             standalone={false}
             width={width}
-            height={300}
-            padding={{ top: 20, bottom: 40, left: 0, right: 24 }}
+            height={280}
+            padding={{ top: 30, bottom: 20, left: 0, right: 24 }}
           >
             <VictoryAxis fixLabelOverlap />
             <VictoryAxis dependentAxis />

@@ -26,7 +26,6 @@ export default function actions(dispatch) {
 
           return acc
         }, {})
-
       dispatch({
         type: 'SET_ORDERS_BY_DAY',
         orders_by_day: Object.entries(ordersByDay),
