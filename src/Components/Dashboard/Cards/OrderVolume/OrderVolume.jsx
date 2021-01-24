@@ -27,9 +27,11 @@ export default function OrderVolume() {
     return result;
   }
 
-  const orderByDay = orders_by_day && orders_by_day.map(x => ({
-    date: x[0],
-    volume: getFilteredVolume(x[1])
+  const orderByDay = orders_by_day && orders_by_day.map(order => (
+    { dates: order[0], volumes: order[1] }
+  )).map(x => ({
+    date: x.dates,
+    volume: getFilteredVolume(x.volumes)
   }))
 
   const SupplierLabelOptions = data && data.map(item => item.supplier)

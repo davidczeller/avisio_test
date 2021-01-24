@@ -23,9 +23,11 @@ export default () => {
     return acc
   }, {})
 
-  const deliveryDates = ordersByDeliveryDate && ordersByDeliveryDate.map(item => ({
-    date: item[0],
-    suppliers: item[1].map(item => item.supplier).reduce((acc, supplier) => {
+  const deliveryDates = ordersByDeliveryDate && ordersByDeliveryDate.map(order => (
+    {date: order[0], suppliers: order[1]}
+  )).map(item => ({
+    date: item.date,
+    suppliers: item.suppliers.map(item => item.supplier).reduce((acc, supplier) => {
       if (!acc[supplier]) {
         acc[supplier] = 0
       }
