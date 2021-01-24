@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Tooltip from '../Common/Tooltip'
+import Tooltip from '../BaseComponents/Tooltip'
 import './Button.scss'
 
 export default function Button({ handleClick, title, icon, size, tooltip, tooltipDirection, marginTop, noPadding }) {

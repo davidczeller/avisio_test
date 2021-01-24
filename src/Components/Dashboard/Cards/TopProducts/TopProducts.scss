@@ -10,14 +10,22 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     padding: 4px;
-    background: #0000000f;
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.3)
+    );
   }
   .row {
     text-transform: capitalize;
     font-family: 'Lato', sans-serif;
     flex: 1 1;
     &:nth-child(odd) {
-      background: #0000000f;
+      background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.3)
+      );
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
     }

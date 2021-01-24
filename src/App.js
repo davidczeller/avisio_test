@@ -24,7 +24,5 @@ export default function App() {
   )
 }
 
-//common => baseComponents || uiElements
 //icons as static instead of links
-//isButton => showButton
 //naming ...[0], ..[1] based on supplierranking 

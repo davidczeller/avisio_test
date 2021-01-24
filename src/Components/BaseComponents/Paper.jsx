@@ -1,12 +1,12 @@
 import React from 'react'
 
 import './Paper.scss'
-import Tooltip from '../Common/Tooltip'
-import Button from '../Common/Button'
+import Tooltip from '../BaseComponents/Tooltip'
+import Button from '../BaseComponents/Button'
 
 import { useStateProviderValue } from '../../Services/StateProvider'
 
-export default function Paper({ headerText, content, isButton, flex }) {
+export default function Paper({ headerText, content, showButton, flex }) {
   const [{ data, sort_type }, dispatch] = useStateProviderValue();
 
   const setSortType = () => {
@@ -21,13 +21,13 @@ export default function Paper({ headerText, content, isButton, flex }) {
         sort_type: 'cost'
       })
     }
-  }
+  } //Ezt kiszervezni
 
   return (
     <div className='paper_container' style={{ flex }}>
       <div className="top_container">
         <div className="header">{headerText}</div>
-        {isButton && (
+        {showButton && (
           <Button
             className="menu-trigger"
             icon={

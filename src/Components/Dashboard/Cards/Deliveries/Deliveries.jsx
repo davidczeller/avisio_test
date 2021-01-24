@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Paper from '../../../Common/Paper'
+import Paper from '../../../BaseComponents/Paper'
 import './Deliveries.scss'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'

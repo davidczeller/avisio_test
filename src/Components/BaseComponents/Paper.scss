@@ -1,13 +1,16 @@
 .paper_container {
-  background: #ffffff80;
-  backdrop-filter: blur( 6.0px);
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  backdrop-filter: blur(2rem);
   border-radius: 10px;
   padding: 12px;
   margin: 16px 0;
   box-shadow: 0px 0px 10px 0px #888888;
   position: relative;
-  width: 32vw;
-  // height: 52vh;
+  height: 100%;
   &:nth-child(even) {
     margin-left: 24px;
   }
@@ -19,6 +22,7 @@
       font-size: 1.6rem;
       font-family: 'Lato', sans-serif;
       margin-bottom: 16px;
+      color: #425b71;
     }
   }
 }

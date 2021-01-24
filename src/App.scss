@@ -1,11 +1,10 @@
 .app {
   width: 100%;
   min-height: 100vh;
-  padding: 24px 32px; // background-color: #F7F7F7;
-  background: linear-gradient(45deg, #845EC2, #31809A);
+  padding: 24px 32px;
   .title {
     font-size: 3.6rem;
-    color: #FAF7FF;
+    color: #425b71;
     font-family: 'Lato', sans-serif;
     font-weight: 600;
   }
@@ -32,14 +31,14 @@
           border-top-left-radius: 6px;
           border-top-right-radius: 6px;
           padding: 4px;
-          background: #0000000f;
+          background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
         }
         .row {
           text-transform: capitalize;
           font-family: 'Lato', sans-serif;
           flex: 1 1;
           &:nth-child(odd) {
-            background: #0000000f;
+            background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
             border-bottom-left-radius: 6px;
             border-bottom-right-radius: 6px;
           }
@@ -56,11 +55,16 @@
         justify-content: space-between;
         align-items: baseline;
         .delivery_column {
-          height: 120px;
+          height: 100%;
+          min-height: 120px;
           flex: 1;
           background: transparent;
           &:nth-child(odd) {
-            background: #0000000f;
+            background: linear-gradient(
+              to right bottom,
+              rgba(255, 255, 255, 0.8),
+              rgba(255, 255, 255, 0.3)
+            );
             border-bottom-left-radius: 6px;
             border-bottom-right-radius: 6px;
           }
@@ -69,16 +73,21 @@
           }
           .delivery_header {
             font-size: 1.3rem;
-            color: #333;
+            color: #425b71;
             font-family: 'Lato', sans-serif;
             font-weight: 400;
-            background: #0000000f;
+            background: linear-gradient(
+              to right bottom,
+              rgba(255, 255, 255, 0.8),
+              rgba(255, 255, 255, 0.3)
+            );
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;
             padding: 4px;
           }
           .deliveries {
             padding: 4px;
+            color: #2f4150;
           }
         }
       }
@@ -87,9 +96,7 @@
       border: none;
       background: none;
       color: #415efe;
-      transition: all .4s ease-in-out; // position: absolute;
-      // top: 5px;
-      // right: 12px;
+      transition: all .4s ease-in-out;
       padding: 8px;
       border-radius: 50%;
       cursor: pointer;

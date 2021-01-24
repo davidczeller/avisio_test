@@ -1,15 +1,36 @@
 import React, { useState, useEffect } from 'react'
 
-import Paper from '../../../Common/Paper'
-import Button from '../../../Common/Button'
+import Paper from '../../../BaseComponents/Paper'
+import Button from '../../../BaseComponents/Button'
+import Dropdown from '../../../BaseComponents/Dropdown'
+import LineChart from '../../../Charts/LineChart'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function OrderVolume() {
-  const [{
-    data,
-  }, dispatch] = useStateProviderValue()
+  const [{ data, orders_by_day }, dispatch] = useStateProviderValue()
+  const [ordersByDay, setOrdersByDay] = useState()
+  const [selectedSupplier, setSelectedSupplier] = useState('all')
+  const [selectedProductCategory1, setSelectedProductCategory1] = useState('all')
+  const [selectedProductCategory2, setSelectedProductCategory2] = useState('all')
 
+  const getFilteredVolume = (orders) => {
+    const filteredOrders = orders.filter(o => o.supplier === selectedSupplier || selectedSupplier === 'all')
+      .filter(o => o.productCategory1 === selectedProductCategory1 || selectedProductCategory1 === 'all')
+      .filter(o => o.productCategory2 === selectedProductCategory2 || selectedProductCategory2 === 'all')
+
+    const result = filteredOrders.reduce((acc, order) => {
+      acc += (order.price * parseInt(order.quantity, 10))
+      return acc
+    }, 0)
+
+    return result;
+  }
+
+  const orderByDay = orders_by_day && orders_by_day.map(x => ({
+    date: x[0],
+    volume: getFilteredVolume(x[1])
+  }))
 
   const SupplierLabelOptions = data && data.map(item => item.supplier)
     .filter((value, index, array) => (
@@ -23,27 +44,6 @@ export default function OrderVolume() {
     .filter((value, index, array) => (
       array.indexOf(value) === index
     ))
-
-  const setSelectedSupplier = (supplier) => {
-    dispatch({
-      type: 'SET_SELECTED_SUPPLIER',
-      selected_supplier: supplier,
-    })
-  }
-
-  const setSelectedProductCategory1 = (category1) => {
-    dispatch({
-      type: 'SET_SELECTED_PRODUCT_CATEGORY_1',
-      selected_product_category_1: category1,
-    })
-  }
-
-  const setSelectedProductCategory2 = (category2) => {
-    dispatch({
-      type: 'SET_SELECTED_PRODUCT_CATEGORY_2',
-      selected_product_category_2: category2,
-    })
-  }
 
   return (
     <Paper

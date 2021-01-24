@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Paper from '../../../Common/Paper'
+import Paper from '../../../BaseComponents/Paper'
 import BarChart from '../../../Charts/BarChart'
 import './SupplierRanking.scss'
 
@@ -31,14 +31,15 @@ export default function SupplierRanking() {
     return acc
   }, {})
 
-  const supplierData = ordersBySuppliers && ordersBySuppliers.map(supplier => ({
-    supplier: supplier[0],
-    volume: getVolume(supplier[1]),
-    quantity: supplier[1].reduce((acc, order) => {
-      acc += parseInt(order.quantity, 10)
-      return acc
-    }, 0),
-  }))
+  const supplierData = ordersBySuppliers && ordersBySuppliers.map(supplier => ({ supplier: supplier[0], orders: supplier[1] }))
+    .map(data => ({
+      supplier: data.supplier,
+      volume: getVolume(data.orders),
+      quantity: data.orders.reduce((acc, order) => {
+        acc += parseInt(order.quantity, 10)
+        return acc
+      }, 0),
+    }))
 
   return (
     <Paper

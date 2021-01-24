@@ -1,66 +1,56 @@
 import React, { useState, useEffect } from 'react'
 
-import Paper from '../../../Common/Paper'
+import Paper from '../../../BaseComponents/Paper'
 import './TopProducts.scss'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function TopProducts() {
   const [{ data, sort_type },] = useStateProviderValue()
-  const [ordersByProduct, setOrdersByProduct] = useState([])
+  const [orderData, setOrderData] = useState()
   const [sortType, setSortType] = useState()
 
   useEffect(() => {
-    orderByProduct()
+    ordersByProduct()
   }, [data])
 
-  useEffect(() => {
-    sortByCost()
-  }, [])
-
-  const orderByProduct = () => data && data.reduce((acc, order) => {
-    if (!acc[order.productName]) {
-      acc[order.productName] = []
+  const ordersByProduct = () => {
+    const getQuantity = (orders) => {
+      return orders.reduce((acc, order) => {
+        acc += parseFloat(order.quantity, 10);
+        return acc;
+      }, 0);
     }
 
-    acc[order.productName].push(order)
+    const getCost = (orders) => {
+      return orders.reduce((acc, order) => {
+        acc += parseFloat(order.price, 10);
+        return acc;
+      }, 0)
+    }
 
-    const x = Object.values(acc)
-    const y = x.map(item => item)
+    const x = data && data.reduce((acc, order) => {
+      if (!acc[order.productName]) {
+        acc[order.productName] = []
+      }
+      acc[order.productName].push(order)
+      return acc
+    }, {});
 
-    const q = y.map((item, idx) => (
-      (item.length > 1) ? (
-        item.map(i => (
-          parseFloat(i.quantity)
-        ))
-      ) : (
-          parseFloat(item[0].quantity)
-        )
-    ))
+    const ordersAndProducts = x && Object.entries(x)
+      .map(data => ({ productName: data[0], orders: data[1] }))
+      .map(data => ({
+        product: data.productName,
+        cost: getCost(data.orders),
+        quantity: getQuantity(data.orders)
+      }));
+    setOrderData(ordersAndProducts)
+  }
 
-    const c = q.map(item => (
-      typeof item !== 'number' ? (
-        item.reduce(function (a, b) {
-          return a + b;
-        }, 0)
-      ) : (
-          item
-        )
-    ))
-
-    const z = y.map((item, idx) => ({
-      product: item[0].productName,
-      cost: item[0].price * item.length,
-      quantity: c[idx]
-    }))
-    setOrdersByProduct(z)
-    return acc
-  }, {})
-
-  const sortByCost = () => ordersByProduct && ordersByProduct.sort(function (a, b) {
+  const sortByCost = () => orderData && orderData.sort(function (a, b) {
     return b.cost - a.cost
   });
-  const sortByQuantity = () => ordersByProduct && ordersByProduct.sort(function (a, b) {
+  const sortByQuantity = () => orderData && orderData.sort(function (a, b) {
     return b.quantity - a.quantity
   });
 
@@ -72,31 +62,30 @@ export default function TopProducts() {
   }
 
 
-
   return (
     <Paper
       flex='1'
       marginLeft
-      isButton
+      showButton
       headerText='Top 3 Products Ordered'
       content={
         <>
           <div className="top3_container">
             <div className="row">
               <div className="top_products_title">Products</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+              {orderData && orderData.slice(0, 3).map((item, idx) =>
                 <p key={idx + item.product}>{item.product}</p>
               )}
             </div>
             <div className="row">
               <div className="top_products_title">Quantity</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+              {orderData && orderData.slice(0, 3).map((item, idx) =>
                 <p key={idx + item.quantity}>{item.quantity}</p>
               )}
             </div>
             <div className="row">
               <div className="top_products_title">Cost</div>
-              {ordersByProduct && ordersByProduct.slice(0, 3).map((item, idx) =>
+              {orderData && orderData.slice(0, 3).map((item, idx) =>
                 <p key={idx + item.cost}>€ {item.cost}</p>
               )}
             </div>
