@@ -9,7 +9,7 @@ import QuantityIcon from '../../../../Static/Images/icons8-decline-50.png'
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function SupplierRanking() {
-  const [{ data, sort_type }, dispatch] = useStateProviderValue()
+  const [{ data }, dispatch] = useStateProviderValue()
   const [ordersBySuppliers, setOrdersBySuppliers] = useState()
   const [sortType, setSortType] = useState('volume')
 

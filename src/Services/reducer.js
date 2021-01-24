@@ -1,6 +1,5 @@
 export const initialState = {
   data: null,
-  sort_type: 'cost',
   orders_by_day: null
 }
 
@@ -10,11 +9,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         data: action.data,
-      }
-    case 'SET_SORT_TYPE':
-      return {
-        ...state,
-        sort_type: action.sort_type,
       }
     case 'SET_ORDERS_BY_DAY':
       return {

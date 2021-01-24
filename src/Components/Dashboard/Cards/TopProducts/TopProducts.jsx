@@ -8,7 +8,7 @@ import QuantityIcon from '../../../../Static/Images/icons8-decline-50.png'
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function TopProducts() {
-  const [{ data, sort_type },] = useStateProviderValue()
+  const [{ data },] = useStateProviderValue()
   const [orderData, setOrderData] = useState()
   const [sortType, setSortType] = useState('cost')
 
