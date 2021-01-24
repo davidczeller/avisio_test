@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import "./Dropdown.scss";
 
 import Button from './Button'
+import FilterIcon from '../../Static/Images/icons8-mail-filter-50.png'
 
 export default function Dropdown({ content }) {
 
@@ -14,7 +15,7 @@ export default function Dropdown({ content }) {
       <div className="menu-container">
         <Button
           className="menu-trigger"
-          icon={<img src="https://img.icons8.com/ios/24/ffffff/mail-filter.png" />} 
+          buttonIcon={FilterIcon} 
           tooltip='Filter'
           tooltipDirection='bottom'
           handleClick={onClick}

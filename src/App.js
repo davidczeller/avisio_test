@@ -25,4 +25,3 @@ export default function App() {
 }
 
 //icons as static instead of links
-//naming ...[0], ..[1] based on supplierranking 

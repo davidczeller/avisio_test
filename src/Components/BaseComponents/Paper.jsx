@@ -6,22 +6,8 @@ import Button from '../BaseComponents/Button'
 
 import { useStateProviderValue } from '../../Services/StateProvider'
 
-export default function Paper({ headerText, content, showButton, flex }) {
-  const [{ data, sort_type }, dispatch] = useStateProviderValue();
-
-  const setSortType = () => {
-    if (sort_type === 'cost') {
-      dispatch({
-        type: 'SET_SORT_TYPE',
-        sort_type: 'quantity'
-      })
-    } else {
-      dispatch({
-        type: 'SET_SORT_TYPE',
-        sort_type: 'cost'
-      })
-    }
-  } //Ezt kiszervezni
+export default function Paper({ headerText, content, showButton, flex, buttonIcon, handleClick, tooltip }) {
+  const [{ data }, dispatch] = useStateProviderValue();
 
   return (
     <div className='paper_container' style={{ flex }}>
@@ -30,15 +16,10 @@ export default function Paper({ headerText, content, showButton, flex }) {
         {showButton && (
           <Button
             className="menu-trigger"
-            icon={
-              sort_type === 'cost'
-                ? <img src="https://img.icons8.com/ios/24/ffffff/euro-pound-exchange.png" />
-                : <img src="https://img.icons8.com/ios/24/ffffff/negative-dynamic.png" />
-            }
-
-            tooltip={sort_type === 'cost' ? 'Sort By Quantity' : 'Sort By Cost'}
+            buttonIcon={buttonIcon}
+            tooltip={tooltip}
             tooltipDirection='bottom'
-            handleClick={() => setSortType()}
+            handleClick={() => handleClick()}
           />
         )}
       </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Tooltip from '../BaseComponents/Tooltip'
 import './Button.scss'
 
-export default function Button({ handleClick, title, icon, size, tooltip, tooltipDirection, marginTop, noPadding }) {
+export default function Button({ handleClick, title, buttonIcon, size, tooltip, tooltipDirection, marginTop, noPadding }) {
 
   const [buttonSize, setButtonSize] = useState('1.2rem')
 
@@ -26,7 +26,7 @@ export default function Button({ handleClick, title, icon, size, tooltip, toolti
           onClick={() => handleClick()}
           style={{ fontSize: buttonSize, marginTop: marginTop ? { marginTop } : '-16px', padding: noPadding ? '0' : '4px' }}
         >
-          {title || icon}
+          {title || <img style={{ height: 24 }} alt='menu-trigger' src={buttonIcon} />}
         </button>
       </Tooltip>
     ) : (
@@ -34,7 +34,7 @@ export default function Button({ handleClick, title, icon, size, tooltip, toolti
           onClick={() => handleClick()}
           style={{ fontSize: buttonSize }}
         >
-          {title || icon}
+          {title || <img style={{ height: 24 }} alt='menu-trigger' src={buttonIcon} />}
         </button>
       )
   )

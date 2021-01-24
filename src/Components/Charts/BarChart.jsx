@@ -6,11 +6,12 @@ import { VictoryChart, VictoryBar, VictoryAxis, VictoryLabel } from 'victory';
 import Paper from '../BaseComponents/Paper';
 
 
-export default function LineChart(props) {
+export default function BarChart(props) {
   const {
     title,
     labels,
     value,
+    sortType,
   } = props;
 
   const [width, setWidth] = useState(window.innerWidth)
@@ -71,8 +72,7 @@ export default function LineChart(props) {
               data={value.map(supplierData => ({
                 label: supplierData.supplier,
                 x: supplierData.supplier,
-                y: supplierData.quantity
-                // y: getYValue(supplierData, ordering) button to set this
+                y: getYValue(supplierData, sortType)
               }))}
             />
           </VictoryChart>

@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react'
 
 import Paper from '../../../BaseComponents/Paper'
 import './TopProducts.scss'
+import EuroIcon from '../../../../Static/Images/icons8-euro-50.png'
+import QuantityIcon from '../../../../Static/Images/icons8-decline-50.png'
 
 import { useStateProviderValue } from '../../../../Services/StateProvider'
 
 export default function TopProducts() {
   const [{ data, sort_type },] = useStateProviderValue()
   const [orderData, setOrderData] = useState()
-  const [sortType, setSortType] = useState()
+  const [sortType, setSortType] = useState('cost')
+
 
   useEffect(() => {
     ordersByProduct()
   }, [data])
+
 
   const ordersByProduct = () => {
     const getQuantity = (orders) => {
@@ -47,26 +51,38 @@ export default function TopProducts() {
     setOrderData(ordersAndProducts)
   }
 
-  const sortByCost = () => orderData && orderData.sort(function (a, b) {
+  const sortByCost = () => orderData && orderData.sort((a, b) => {
     return b.cost - a.cost
   });
-  const sortByQuantity = () => orderData && orderData.sort(function (a, b) {
+  const sortByQuantity = () => orderData && orderData.sort((a, b) => {
     return b.quantity - a.quantity
   });
 
 
-  if (sort_type === 'cost') {
+  if (sortType === 'cost') {
     sortByCost()
   } else {
     sortByQuantity()
   }
 
+  const handleClick = () => sortType === 'cost' ? setSortType('quantity') : setSortType('cost')
 
   return (
     <Paper
       flex='1'
       marginLeft
       showButton
+      buttonIcon={
+        sortType === 'cost'
+          ? EuroIcon
+          : QuantityIcon
+      }
+      tooltip={
+        sortType === 'cost'
+          ? 'Sort By Quantity'
+          : 'Sort By Cost'
+      }
+      handleClick={() => handleClick()}
       headerText='Top 3 Products Ordered'
       content={
         <>
