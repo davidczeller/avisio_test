@@ -47,8 +47,6 @@ export default function Dashboard() {
     updatePapers(items)
   }
 
-  console.log(isDesktop)
-
   return (
     <div>
       <div className="title">Dashboard</div>
